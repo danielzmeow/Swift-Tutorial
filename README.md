@@ -19,3 +19,16 @@ Text("Hello, World!")
 
 ## Views, structures, and properties
 
+### Create a subview
+
+```java 
+struct SubView: View {
+    var body: some View {
+        [View Contents]
+    }
+}
+```
+
+### Add a property
+
+Add a property just by `let [name]: [Type]` format
