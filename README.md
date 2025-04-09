@@ -1,10 +1,12 @@
 # Swift Tutorial
 
-# Developer in Swift Tutorials
+This repository contains the notes and codes I've compiled while progressing through my learning journey of Swift and SwiftUI.
 
-## Explore Xcode
+# Develop in Swift
 
-`String` represents the text type in Swift. The consequences of modifier will influence the final UI shown in actual app.
+## Chapter I: Explore Xcode
+
+In Swift, the `String` type is used to denote text. **Modifiers** applied consequences to this type can ultimately impact how the UI appears in a real application.
 
 ```Swift
 //With padding
@@ -17,7 +19,7 @@ Text("Hello, World!")
     .padding()
 ```
 
-## Views, structures, and properties
+## Chapter II: Views, structures, and properties
 
 ### Create a subview
 
@@ -31,4 +33,7 @@ struct SubView: View {
 
 ### Add a property
 
-Add a property just by `let [name]: [Type]` format
+You can incorporate a property using the format `let [name]: [Type]`, which allows you to pass this property into the subviews seamlessly.
+
+## Chapter III: Layout and Style
+
