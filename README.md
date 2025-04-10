@@ -2,8 +2,6 @@
 
 This repository contains the notes and codes I've compiled while progressing through my learning journey of Swift and SwiftUI.
 
-# Developer in Swift Tutorials
-
 # Develop in Swift
 
 ## Chapter I: Explore Xcode
