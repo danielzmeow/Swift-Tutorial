@@ -7,15 +7,20 @@
 
 import SwiftUI
 
+let welcomeColors: [Color] = [
+    .gradientTop,
+    .gradientBottom
+]
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            WelcomePage()
+            FeaturePage()
         }
-        .padding()
+        .tabViewStyle(.page)
+        .background(Gradient(colors: welcomeColors))
+        .foregroundStyle(.white)
     }
 }
 

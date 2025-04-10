@@ -37,3 +37,38 @@ You can incorporate a property using the format `let [name]: [Type]`, which allo
 
 ## Chapter III: Layout and Style
 
+In Xcode, incorporating a new SwiftUI View is straightforward; just navigate to File > New > File from Template.
+
+The `.font` modifier, which demands a **Font** type argument, allows shorthand notation—`Font.title` can be succinctly written as `.title`.
+
+Ensure that when utilizing `#Preview`, the logic aligns with your invocation method. The description should be sufficiently extensive to span multiple lines, for example, *A multiline description about a feature paired with the image on the left.*
+
+### Size of Views
+
+To add borders to UI views, employ the `.border` attribute. Meanwhile, `.frame` is intended to constrain view dimensions. Use `.tint` to deploy the App's accent color.
+
+### Padding
+
+To instantiate padding surrounding views, utilize `.padding`.
+
+Integrate `Spacer()` to occupy additional space, ensuring the page is fully utilized.
+
+### Tab View
+
+Craft a tab view using the tab view interface.
+
+```Swift
+TabView {
+    WelcomePage()
+    FeaturePage()
+}
+.tabViewStyle(.page)
+```
+
+### Customize Color in Assets
+
+Focus on the following aspects:
+
+- Opacity
+- Brightness
+- Gradient
