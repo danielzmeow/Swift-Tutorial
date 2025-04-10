@@ -37,4 +37,3 @@ You can incorporate a property using the format `let [name]: [Type]`, which allo
 
 ## Chapter III: Layout and Style
 
-You can incorporate a property using the format `let [name]: [Type]`, which allows you to pass this property into the subviews seamlessly.
