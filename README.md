@@ -76,3 +76,34 @@ Focus on the following aspects:
 ## Chapter IV: Buttons and state
 
 `@State` properties and buttons can work together to update the UI of app.
+
+Property  marked with the keyword `var` means new values can be **assigned** to it. This view is dynamic.
+
+The `.resizable` modifier tells the image it can stretch to fill any available space.
+
+### Use state to update view
+
+SwiftUI doesn’t monitor every property in an app by default. You need to tell SwiftUI to monitor specific **part** and update UI when it changes. Focus on the variable changing over time or actions and use `@State` to monitor it.
+
+Make `@State` properties private because:
+
+1. View state ownership: The state belongs to that specific view
+2. Encapsulation: It prevents other views from directly changing the value
+
+Use `withAnimation` to animate the change outside the codes caused the value change.
+
+```Swift
+Button("Roll") {
+    withAnimation {
+        numberOfPips = Int.random(in: 1...6)
+    }
+}
+```
+
+### ForEach
+
+The ForEach view is dynamic; it computes its subviews based on its input, which may change with the state of the app. 
+
+### UI
+
+The `.tint` modifier only affects views that rely on the accent color — typically controls such as buttons and toggles. 
