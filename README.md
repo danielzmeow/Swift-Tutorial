@@ -35,7 +35,7 @@ struct SubView: View {
 
 You can incorporate a property using the format `let [name]: [Type]`, which allows you to pass this property into the subviews seamlessly.
 
-## Chapter III: Layout and Style
+## Chapter III: Layout and style
 
 In Xcode, incorporating a new SwiftUI View is straightforward; just navigate to File > New > File from Template.
 
@@ -72,3 +72,7 @@ Focus on the following aspects:
 - Opacity
 - Brightness
 - Gradient
+
+## Chapter IV: Buttons and state
+
+`@State` properties and buttons can work together to update the UI of app.
