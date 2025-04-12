@@ -107,3 +107,6 @@ The ForEach view is dynamic; it computes its subviews based on its input, which 
 ### UI
 
 The `.tint` modifier only affects views that rely on the accent color — typically controls such as buttons and toggles. 
+
+## Chapter V: List and text fields
+
