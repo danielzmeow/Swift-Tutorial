@@ -108,7 +108,7 @@ The ForEach view is dynamic and generates its subviews from its input, which can
 
 The `.tint` modifier influences only views that utilize the accent color, primarily controls like buttons and toggles.
 
-## Chapter V: List and text fields
+## Chapter V: List and Text Fields
 
 ### List view
 
@@ -122,7 +122,7 @@ A `TextField` view lets people enter text into a box.
 
 A binding is a way for you to give one view access to state that another view owns. To create a binding to a state property, prefix the property name with $.
 
-# Comparison of @State and @Binding in SwiftUI
+### Comparison of @State and @Binding in SwiftUI
 
 | Feature           | @State                                            | @Binding                                                                    |
 | ----------------- | ------------------------------------------------- | --------------------------------------------------------------------------- |
@@ -147,3 +147,26 @@ if let randomName = names.randomElement() {
 }
 ```
 
+## Chapter VI: Custom Types and Swift Testing
+
+### Define Your Own Type
+
+Adopting a *non-combined* strategy for data modelling can easily result in **inconsistent** data.
+
+```Swift
+@State private var players: [String] = ["Tom", "Ndr", "Clay"]
+@State private var scores: [Int] = [0, 0, 0]
+```
+
+To ensure data consistency, it's crucial to define your own type.
+
+### ID
+
+To make a type adhere to `Identifiable`, you'll need to incorporate the following:
+
+```Swift
+// Example
+let id = UUID()
+```
+
+By using the `$` prefix, you can bind each element within the array. Thanks to conforming to `Identifiable`, there's no longer a necessity to specify the `id: parameter` when utilizing `ForEach`.
