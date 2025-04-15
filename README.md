@@ -170,3 +170,64 @@ let id = UUID()
 ```
 
 By using the `$` prefix, you can bind each element within the array. Thanks to conforming to `Identifiable`, there's no longer a necessity to specify the `id: parameter` when utilizing `ForEach`.
+
+### Enumerations
+
+Enumerations define a common type for a group of related but mutually exclusive values. Unlike a struct, which can have many instances, the only values of an enumeration that exist are the ones in its definition.
+
+```Swift
+enum EnumerationsOfGame {
+    case a
+    case b
+}
+```
+
+### Switch Status
+
+```Swift
+switch status.state {
+    case 1:
+    case 2:
+    default:
+}
+```
+
+### Mutating Structure
+
+For `struct` types, you mark any methods that might change the properties of that `struct` with the `mutating` keyword.
+
+```Swift
+mutating func resetScore(to newValue: Int) {
+    code
+}
+```
+
+### Unit Test
+
+Recall that your test product is **separate** from your app product. Use such codes.
+
+```Swift
+@testable import YourApp
+```
+
+```Swift
+struct ScoreKeeperTests {
+    // Use @Test to announce
+    // Use arguments to pass in parameters
+    @Test("Reset Player Scores", arguments: [0, 10, 20]) func resetScores(to newValue: Int) async throws {
+        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+        // Actions
+        var scoreboard = Scoreboard(players: [
+            Player(name: "Elisha", score: 0),
+            Player(name: "Andre", score: 5),
+        ])
+        scoreboard.resetScores(to: newValue)
+        
+        for player in scoreboard.players {
+            // Expected outcomes
+            #expect(player.score == newValue)
+        }
+    }
+
+}
+```

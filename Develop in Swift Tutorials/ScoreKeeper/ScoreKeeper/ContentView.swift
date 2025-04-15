@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var players: [Player] = [
-        Player(name: "Tom", score: 2),
-        Player(name: "Ndr", score: 0),
-        Player(name: "Clay", score: 5)
-    ]
+    @State private var scoreBoard = Scoreboard()
+    @State private var startingPoints: Int = 0
     
     var body: some View {
         VStack(alignment: .leading){
             Text("Score Keeper")
                 .bold()
                 .font(.title)
+            
+            SettingView(startingPoint: $startingPoints, doesHighestScoreWin: $scoreBoard.doesHighestScoreWin)
+                .disabled(scoreBoard.state != .setup)
 
                 // $players: bind the array list. $player: each player in players (list)
             List {
@@ -29,26 +29,56 @@ struct ContentView: View {
                 }
                 .bold()
                     
-                ForEach($players) { $player in
+                ForEach($scoreBoard.players) { $player in
                     HStack {
-                        TextField("Name", text: $player.name)
+                        HStack {
+                            if scoreBoard.winners.contains(player) {
+                                Image(systemName: "crown.fill")
+                                    .foregroundStyle(Color.yellow)
+                            }
+                            TextField("Name", text: $player.name)
+                        }
                         Text("\(player.score)")
                             .padding(.trailing)
                         Stepper("\(player.score)", value: $player.score)
                             .labelsHidden()
                     }
                 }
-                .onDelete{ players.remove(atOffsets: $0) }
-                .onMove{ players.move(fromOffsets: $0, toOffset: $1) }
+                .onDelete{ scoreBoard.players.remove(atOffsets: $0) }
+                .onMove{ scoreBoard.players.move(fromOffsets: $0, toOffset: $1) }
                 
                 Button("Add Player", systemImage: "plus") {
-                    players.append(Player(name: "", score: 0))
+                    scoreBoard.players.append(Player(name: "", score: 0))
                 }
                 .labelStyle(.titleOnly)
+                .foregroundStyle(Color.accentColor)
                 
                 EditButton()
+                    .foregroundStyle(Color.accentColor)
             }
-            .listStyle(.insetGrouped)
+            .listStyle(.plain)
+            
+            switch scoreBoard.state {
+            case .setup:
+                Button("Play Game", systemImage: "play.fill") {
+                    scoreBoard.state = .playing
+                    scoreBoard.resetScores(to: startingPoints)
+                }
+                .padding(.leading)
+                
+            case .playing:
+                Button("End Game", systemImage: "stop.fill") {
+                    scoreBoard.state = .gameOver
+                }
+                .padding(.leading)
+                
+            case .gameOver:
+                Button("Reset Game", systemImage: "arrow.counterclockwise") {
+                    scoreBoard.state = .setup
+                }
+                .padding(.leading)
+            }
+
         }
         .padding()
     }

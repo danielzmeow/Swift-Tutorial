@@ -14,3 +14,11 @@ struct Player: Identifiable {
     var name: String
     var score: Int
 }
+
+// Set up condition for equatable, return a boolean
+
+extension Player: Equatable {
+    static func == (lhs: Player, rhs: Player) -> Bool {
+        lhs.name == rhs.name && lhs.score == rhs.score
+    }
+}
