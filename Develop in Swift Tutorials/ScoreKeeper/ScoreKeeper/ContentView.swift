@@ -15,39 +15,45 @@ struct ContentView: View {
     ]
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading){
             Text("Score Keeper")
-                .font(.title)
                 .bold()
-                .padding(.bottom)
-            
-            // $players: bind the array list. $player: each player in players (list)
-            Grid {
-                GridRow {
+                .font(.title)
+
+                // $players: bind the array list. $player: each player in players (list)
+            List {
+                HStack {
                     Text("Name")
-                        .gridColumnAlignment(.leading)
+                    Spacer()
                     Text("Score")
                 }
                 .bold()
-                
+                    
                 ForEach($players) { $player in
-                    GridRow {
+                    HStack {
                         TextField("Name", text: $player.name)
                         Text("\(player.score)")
+                            .padding(.trailing)
                         Stepper("\(player.score)", value: $player.score)
                             .labelsHidden()
                     }
                 }
+                .onDelete{ players.remove(atOffsets: $0) }
+                .onMove{ players.move(fromOffsets: $0, toOffset: $1) }
+                
+                Button("Add Player", systemImage: "plus") {
+                    players.append(Player(name: "", score: 0))
+                }
+                .labelStyle(.titleOnly)
+                
+                EditButton()
             }
-            .padding(.vertical)
-            
-            Button("Add Player", systemImage: "plus") {
-                players.append(Player(name: "", score: 0))
-            }
+            .listStyle(.insetGrouped)
         }
         .padding()
     }
 }
+
 
 #Preview {
     ContentView()
