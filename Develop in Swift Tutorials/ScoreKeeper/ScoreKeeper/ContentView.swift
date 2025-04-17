@@ -48,7 +48,7 @@ struct ContentView: View {
                 .onMove{ scoreBoard.players.move(fromOffsets: $0, toOffset: $1) }
                 
                 Button("Add Player", systemImage: "plus") {
-                    scoreBoard.players.append(Player(name: "", score: 0))
+                    scoreBoard.players.append(Player(name: "", score: startingPoints))
                 }
                 .labelStyle(.titleOnly)
                 .foregroundStyle(Color.accentColor)
