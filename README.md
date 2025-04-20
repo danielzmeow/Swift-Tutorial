@@ -270,3 +270,52 @@ ContentView()
 - Put a model into the app container
 - Use `@Query` to get it model (Each data is viewed as a kind of model)
 - Use `@Environment` (variable) to access the context and modify data
+
+## Chapter VIII: Navigation, Editing and Relationships
+
+### Tab View
+
+```Swift
+TabView {
+    Tab("Friends", systemImage: "person.and.person") {
+        Text("Friends")
+    }
+            
+    Tab("Movies", systemImage: "film.stack") {
+        Text("Movies")
+    }
+}
+```
+### Create Sample Data
+
+```Swift
+import Foundation
+import SwiftData
+
+@MainActor
+class SampleData {
+    static let shared = SampleData()
+    
+    let modelContainer: ModelContainer
+    
+    var context: ModelContext {
+        modelContainer.mainContext
+    }
+    
+    private init() {
+        let schema = Schema([
+            Friend.self,
+            Movie.self
+        ])
+        
+        let modelConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        
+        do {
+            modelContainer = try ModelContainer(for: schema, configurations: [modelConfig])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }
+}
+```
+
