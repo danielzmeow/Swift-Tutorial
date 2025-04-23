@@ -288,6 +288,8 @@ TabView {
 ```
 ### Create Sample Data
 
+Swift can automatically judge type of data and add it to proper place
+
 ```Swift
 import Foundation
 import SwiftData
@@ -319,3 +321,13 @@ class SampleData {
 }
 ```
 
+### Set init value
+
+Deciding on proper UI to display is important thinking. Use `init` to give a default value to specific parameters. Through which method, codes can be reused at different places. e.g. Creating *new* item and item *detail*
+
+```Swift
+init(friend: Friend, isNew: Bool = false) {
+    self.friend = friend
+    self.isNew = isNew
+}
+```

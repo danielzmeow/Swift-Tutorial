@@ -13,13 +13,20 @@ import SwiftData
 class SampleData {
     // Shared singleton instance providing global access to the data layer
     static let shared = SampleData()
-    
     // The model container that manages the persistent store and model schema
     let modelContainer: ModelContainer
     
     // Provides access to the main context for performing data operations (create, read, update, delete)
     var context: ModelContext {
         modelContainer.mainContext
+    }
+    
+    var friend: Friend {
+        Friend.sampleData.first!
+    }
+    
+    var movie: Movie {
+        Movie.sampleData.first!
     }
     
     // Private initializer to enforce singleton pattern. Sets up the data model schema and configuration.
@@ -41,9 +48,7 @@ class SampleData {
             // Create the model container with the defined schema and configuration
             // This is where potential errors might occur (file system issues, model incompatibilities)
             modelContainer = try ModelContainer(for: schema, configurations: [modelConfig])
-            
             insertSampleData()
-            
             try context.save()
         } catch {
             // If container creation fails, terminate the app with an error message
