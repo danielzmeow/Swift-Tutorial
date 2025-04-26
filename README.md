@@ -1,12 +1,12 @@
 # Swift Tutorial
 
-This repository contains the notes and codes I've compiled while progressing through my learning journey of Swift and SwiftUI.
+This repository contains the notes and code I've compiled while progressing through my learning journey of Swift and SwiftUI.
 
 # Develop in Swift
 
 ## Chapter I: Explore Xcode
 
-In Swift, the `String` type is used to denote text. **Modifiers** applied consequences to this type can ultimately impact how the UI appears in a real application.
+In Swift, the `String` type is used to represent text. **Modifiers** applied to views can ultimately impact how the UI appears in a real application.
 
 ```Swift
 //With padding
@@ -33,29 +33,29 @@ struct SubView: View {
 
 ### Add a property
 
-You can incorporate a property using the format `let [name]: [Type]`, which allows you to pass this property into the subviews seamlessly.
+You can incorporate a property using the format `let [name]: [Type]`, which allows you to pass this property into subviews seamlessly.
 
 ## Chapter III: Layout and style
 
 In Xcode, incorporating a new SwiftUI View is straightforward; just navigate to File > New > File from Template.
 
-The `.font` modifier, which demands a **Font** type argument, allows shorthand notation—`Font.title` can be succinctly written as `.title`.
+The `.font` modifier, which requires a **Font** type argument, allows shorthand notation—`Font.title` can be succinctly written as `.title`.
 
 Ensure that when utilizing `#Preview`, the logic aligns with your invocation method. The description should be sufficiently extensive to span multiple lines, for example, *A multiline description about a feature paired with the image on the left.*
 
 ### Size of Views
 
-To add borders to UI views, employ the `.border` attribute. Meanwhile, `.frame` is intended to constrain view dimensions. Use `.tint` to deploy the App's accent color.
+To add borders to UI views, employ the `.border` modifier. Meanwhile, `.frame` is intended to constrain view dimensions. Use `.tint` to apply the App's accent color.
 
 ### Padding
 
-To instantiate padding surrounding views, utilize `.padding`.
+To add padding surrounding views, utilize `.padding`.
 
 Integrate `Spacer()` to occupy additional space, ensuring the page is fully utilized.
 
 ### Tab View
 
-Craft a tab view using the tab view interface.
+Craft a tab view using the `TabView` container.
 
 ```Swift
 TabView {
@@ -83,7 +83,7 @@ The `.resizable` modifier grants the image the ability to expand and occupy any 
 
 ### Utilize State to Refresh the View
 
-SwiftUI does not inherently monitor all properties within an app. To ensure that SwiftUI keeps track of specific **elements** and updates the UI when changes occur, focus on variables that evolve over time or through actions, and employ `@State` to oversee them.
+SwiftUI does not inherently monitor all properties within an app. To ensure that SwiftUI keeps track of specific **variables** and updates the UI when changes occur, focus on variables that evolve over time or through actions, and employ `@State` to manage them.
 
 Make `@State` properties private because:
 
@@ -102,7 +102,7 @@ Button("Roll") {
 
 ### ForEach
 
-The ForEach view is dynamic and generates its subviews from its input, which can vary with the app's state.
+The `ForEach` view is dynamic and generates its subviews from its input, which can vary with the app's state.
 
 ### UI
 
@@ -120,7 +120,7 @@ A `TextField` view lets people enter text into a box.
 
 ### Binding
 
-A binding is a way for you to give one view access to state that another view owns. To create a binding to a state property, prefix the property name with $.
+A binding is a way for you to give one view access to state that another view owns. To create a binding to a state property, prefix the property name with `$`.
 
 ### Comparison of @State and @Binding in SwiftUI
 
@@ -137,7 +137,7 @@ A binding is a way for you to give one view access to state that another view ow
 | Symbol Usage      | Access directly by name in the view               | Passed to child views using $ prefix                                        |
 | Scope             | Limited to the view that declares it              | Enables data sharing between parent and child views                         |
 
-Carefully deal with situation may contains a `nil` return.
+Carefully handle situations that may contain a `nil` return.
 
 ```Swift
 if let randomName = names.randomElement() {
@@ -151,7 +151,7 @@ if let randomName = names.randomElement() {
 
 ### Define Your Own Type
 
-Adopting a *non-combined* strategy for data modelling can easily result in **inconsistent** data.
+Adopting a *non-combined* strategy for data modeling can easily result in **inconsistent** data.
 
 ```Swift
 @State private var players: [String] = ["Tom", "Ndr", "Clay"]
@@ -162,14 +162,14 @@ To ensure data consistency, it's crucial to define your own type.
 
 ### ID
 
-To make a type adhere to `Identifiable`, you'll need to incorporate the following:
+To make a type conform to `Identifiable`, you'll need to incorporate the following:
 
 ```Swift
 // Example
 let id = UUID()
 ```
 
-By using the `$` prefix, you can bind each element within the array. Thanks to conforming to `Identifiable`, there's no longer a necessity to specify the `id: parameter` when utilizing `ForEach`.
+By using the `$` prefix, you can bind each element within the array. Thanks to conforming to `Identifiable`, there's no longer a necessity to specify the `id:` parameter when utilizing `ForEach`.
 
 ### Enumerations
 
@@ -182,7 +182,7 @@ enum EnumerationsOfGame {
 }
 ```
 
-### Switch Status
+### Switch Statement
 
 ```Swift
 switch status.state {
@@ -204,7 +204,7 @@ mutating func resetScore(to newValue: Int) {
 
 ### Unit Test
 
-Recall that your test product is **separate** from your app product. Use such codes.
+Recall that your test product is **separate** from your app product. Use the following code:
 
 ```Swift
 @testable import YourApp
@@ -222,7 +222,7 @@ struct ScoreKeeperTests {
             Player(name: "Andre", score: 5),
         ])
         scoreboard.resetScores(to: newValue)
-        
+
         for player in scoreboard.players {
             // Expected outcomes
             #expect(player.score == newValue)
@@ -244,32 +244,32 @@ The format declaration is **semantic**: You specify the parts of the date you wa
 
 ### Swift Data
 
-The aim of database is for persistent storage
+The aim of a database is for persistent storage.
 
-Import SwiftData first
+Import SwiftData first:
 
 ```Swift
 import SwiftData
 ```
 
-`@Model`: SwiftData gives you access to the `@Model` macro. Macros modify existing code with new functionality. In this case, @Model converts a Swift class into a stored model managed by SwiftData.
+`@Model`: SwiftData gives you access to the `@Model` macro. Macros modify existing code with new functionality. In this case, @Model converts a Swift class into a stored model managed by SwiftData. Using `@Model` will automatically convert data **observable**. To connect specific data, use `@Bindable` (like `@Binding`)
 
-Identity: The *class* type has it built-in identity while the *structure* type does not
+Identity: The *class* type has built-in identity, while the *structure* type does not.
 
-Initializer: For *structures*, Swift generates an initializer with arguments matching each of its properties. But *classes* don’t get autogenerated initializers
+Initializer: For *structures*, Swift generates an initializer with arguments matching each of its properties. But *classes* don’t get autogenerated initializers.
 
-SwiftData need a **container** to connect SwiftUI and SwiftData.
+SwiftData needs a **container** to connect SwiftUI and SwiftData.
 
-> The container is like a translator that sits between where the *data* is stored and the ContentView on screen. `*.self` references the type of data rather than a specific data. The container uses the type blueprint to understand how the model should be saved.
+> The container is like a translator that sits between where the *data* is stored and the ContentView on screen. `*.self` references the type of data rather than a specific data instance. The container uses the type blueprint to understand how the model should be saved.
 
 ```Swift
 ContentView()
     .modelContainer(for: Data.self, inMemory: true)
 ```
 
-- Put a model into the app container
-- Use `@Query` to get it model (Each data is viewed as a kind of model)
-- Use `@Environment` (variable) to access the context and modify data
+- Put a model into the app container.
+- Use `@Query` to get the model (Each data is viewed as a kind of model).
+- Use `@Environment` (variable) to access the context and modify data.
 
 ## Chapter VIII: Navigation, Editing and Relationships
 
@@ -280,7 +280,7 @@ TabView {
     Tab("Friends", systemImage: "person.and.person") {
         Text("Friends")
     }
-            
+
     Tab("Movies", systemImage: "film.stack") {
         Text("Movies")
     }
@@ -288,7 +288,7 @@ TabView {
 ```
 ### Create Sample Data
 
-Swift can automatically judge type of data and add it to proper place
+Swift can automatically infer the type of data and add it to the proper place.
 
 ```Swift
 import Foundation
@@ -297,21 +297,21 @@ import SwiftData
 @MainActor
 class SampleData {
     static let shared = SampleData()
-    
+
     let modelContainer: ModelContainer
-    
+
     var context: ModelContext {
         modelContainer.mainContext
     }
-    
+
     private init() {
         let schema = Schema([
             Friend.self,
             Movie.self
         ])
-        
+
         let modelConfig = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-        
+
         do {
             modelContainer = try ModelContainer(for: schema, configurations: [modelConfig])
         } catch {
@@ -321,9 +321,9 @@ class SampleData {
 }
 ```
 
-### Set init value
+### Set initial value
 
-Deciding on proper UI to display is important thinking. Use `init` to give a default value to specific parameters. Through which method, codes can be reused at different places. e.g. Creating *new* item and item *detail*
+Deciding on the proper UI to display is important. Use `init` to give a default value to specific parameters. Through this method, code can be reused in different places, e.g., creating a *new* item and displaying item *details*.
 
 ```Swift
 init(friend: Friend, isNew: Bool = false) {
@@ -331,3 +331,9 @@ init(friend: Friend, isNew: Bool = false) {
     self.isNew = isNew
 }
 ```
+
+### Relationship
+
+Use `?` to denote an optional type. Each relationship must be **two-way** with *relationship* and *inverse relationship*
+
+The SwiftData can infer two-way relationship automatically based on the types of the properties involved
