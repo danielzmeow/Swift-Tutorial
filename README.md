@@ -337,3 +337,39 @@ init(friend: Friend, isNew: Bool = false) {
 Use `?` to denote an optional type. Each relationship must be **two-way** with *relationship* and *inverse relationship*
 
 The SwiftData can infer two-way relationship automatically based on the types of the properties involved
+
+
+## Observation and Shareable Data Models
+
+### `struct` and `class`
+
+| Feature | Struct | Class |
+|---------|--------|-------|
+| Type | **Value** type | **Reference** type |
+| Memory allocation | Stack (typically) | Heap |
+| Copy behavior | Creates a new copy when assigned or passed | Passes a reference to the same instance |
+| Mutability | Requires `mutating` keyword for methods that modify self | No special keyword required for modification |
+| Inheritance | Does not support inheritance | Supports inheritance |
+| Initialization | Automatic memberwise initializer | No automatic memberwise initializer |
+| Deinitializer | No deinitializer | Can implement `deinit` |
+| Identity operators | Cannot use `===` and `!==` | Can use `===` and `!==` to check identity |
+| Performance | Generally faster for small, simple data | May be better for large, complex data |
+| Thread safety | Safer in multi-threaded environments (due to value semantics) | Requires careful management in multi-threaded code |
+| Use cases | Simple data types, immutable data, small data structures | Complex objects, shared data, objects with identity |
+| Reference counting | No reference counting overhead | Uses ARC (Automatic Reference Counting) |
+| Default choice | Preferred by Apple when possible | Use when specific class features are needed |
+
+**Choose Struct when:**
+- You need value semantics (copies rather than references)
+- You're working with small, simple data
+- The data should be immutable or have controlled mutation
+- You don't need inheritance
+- You want thread safety without synchronization
+
+**Choose Class when:**
+- You need reference semantics (shared instances)
+- You need inheritance
+- You need deinitializers for cleanup
+- You're working with Objective-C interoperability
+- The object's identity matters more than its data
+- You need to control the lifecycle of resources
